@@ -1,0 +1,26 @@
+<mat-card>
+  <a href="#">
+    <div class="card__banner">
+      <img
+        mat-card-image
+        [src]="product?.thumbnail"
+        alt="product thumbnail image"
+      />
+    </div>
+  </a>
+
+  <mat-card-content class="card__content">
+    <div class="card__desc">
+      <h2>{{ product?.title }}</h2>
+      <p>
+        {{ product?.price | currency }}
+        <sup>{{ calculateDiscountedPrice() | currency }}</sup>
+      </p>
+    </div>
+    <div class="card__cart">
+      <button mat-fab aria-label="Example icon button with a delete icon">
+        <mat-icon class="icon">add_shopping_cart</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

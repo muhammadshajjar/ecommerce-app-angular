@@ -1,0 +1,9 @@
+<mat-paginator
+[length]="totalProducts"
+[pageSize]="30"
+[pageSizeOptions]="[40, 60, 100]"
+[showFirstLastButtons]="true"
+aria-label="Select page"
+(page)="onPaginationChange($event)"
+>
+</mat-paginator>

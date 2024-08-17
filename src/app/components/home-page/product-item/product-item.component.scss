@@ -1,0 +1,48 @@
+.card {
+  max-width: 350px;
+  width: 100%;
+}
+
+.card__banner {
+  height: 280px;
+  border-radius: 50px;
+
+  & img {
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.card__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 10px;
+}
+
+.card__desc {
+  & h2 {
+    font-size: 23px;
+    color: #5a5a5a;
+  }
+  & p {
+    font-size: 23px;
+    font-weight: bold;
+    margin-top: 6px;
+
+    & sup {
+      color: gray;
+      text-decoration: line-through;
+      font-weight: normal;
+    }
+  }
+}
+.card__cart {
+  & button {
+    background-color: #00a599;
+  }
+}
+.icon {
+  color: white;
+}

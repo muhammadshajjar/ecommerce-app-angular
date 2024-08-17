@@ -15,11 +15,11 @@ export class ProductService {
       retry({ count: 2, delay: 2000 }),
       catchError((error) => of({ state: 'error', error: error.message })),
       tap((data) => console.log(data)),
-      startWith({ state: 'loading' })
+      startWith({ state: 'loading' }),
     );
   }
 
-  getAllProducts(pageSize: number, pageIndex: number) {
+  getAllProducts(pageSize: number = 30, pageIndex: number = 0) {
     const params = new HttpParams()
       .set('limit', pageSize.toString())
       .set('skip', (pageIndex * pageSize).toString());
