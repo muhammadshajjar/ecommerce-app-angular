@@ -1,13 +1,11 @@
 <mat-card>
-  <a href="#">
-    <div class="card__banner">
-      <img
-        mat-card-image
-        [src]="product?.thumbnail"
-        alt="product thumbnail image"
-      />
-    </div>
-  </a>
+  <div (click)="onPreviewDetail()" class="card__banner">
+    <img
+      mat-card-image
+      [src]="product?.thumbnail"
+      alt="product thumbnail image"
+    />
+  </div>
 
   <mat-card-content class="card__content">
     <div class="card__desc">
@@ -18,7 +16,7 @@
       </p>
     </div>
     <div class="card__cart">
-      <button mat-fab aria-label="Example icon button with a delete icon">
+      <button mat-fab>
         <mat-icon class="icon">add_shopping_cart</mat-icon>
       </button>
     </div>

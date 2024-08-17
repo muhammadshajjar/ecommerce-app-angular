@@ -1,0 +1,21 @@
+.product-image {
+  height: 300px;
+  width: 100%;
+}
+.product-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & h3 {
+    font-weight: bold;
+  }
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.icon {
+  color: gold;
+}

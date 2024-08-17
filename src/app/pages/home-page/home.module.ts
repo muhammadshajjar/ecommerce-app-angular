@@ -22,6 +22,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatOptionModule } from '@angular/material/core';
 import { RouterModule, Routes } from '@angular/router';
+import {
+  MatDialogModule,
+} from '@angular/material/dialog';
+import { DetailDialogComponent } from '../../components/home-page/detail-dialog/detail-dialog.component';
 
 const homeRoutes: Routes = [{ path: '', component: HomeComponent }];
 
@@ -32,6 +36,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeComponent }];
     CategoryComponent,
     PaginatorComponent,
     ProductItemComponent,
+    DetailDialogComponent
   ],
   imports: [
     CommonModule,
@@ -51,6 +56,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeComponent }];
     MatProgressSpinnerModule,
     MatOptionModule,
     MatButtonModule,
+    MatDialogModule,
   ],
 })
 export class HomeModule {}
