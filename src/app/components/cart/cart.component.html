@@ -1,1 +1,30 @@
-<mat-icon class="icon" matBadge="3">shopping_cart</mat-icon>
+@if (cart$ | async; as cart) {
+  <button class="icon-container">
+    <mat-icon
+      class="icon"
+      matBadge="{{ cart.items.length }}"
+      (click)="toggleCart()"
+      >shopping_cart</mat-icon
+    >
+  </button>
+
+  <div class="cart-panel" [ngClass]="{ open: isCartOpen }">
+    <div class="cart-header">
+      <button class="icon-container">
+        <mat-icon class="icon" (click)="toggleCart()">close</mat-icon>
+      </button>
+      <p>Your Cart</p>
+    </div>
+    <div class="cart-content">
+      @for (item of cart.items; track item.product.id) {
+        <app-cart-item [item]="item" />
+      } @empty {
+        <p>Your Cart is Empty!</p>
+      }
+      <div class="cart-footer">
+        <p>Sub Total: {{ cart.totalPrice | currency }}</p>
+        <button mat-button (click)="onClearCart()">Clear Cart</button>
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,31 @@
+.icon-container {
+  background-color: transparent;
+  border: none;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  & img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.cart-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  & button {
+    background-color: #00a599;
+    & .icon {
+      color: white;
+    }
+  }
+}

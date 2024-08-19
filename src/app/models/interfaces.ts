@@ -43,3 +43,20 @@ export interface Product {
   images: string[];
   thumbnail: string;
 }
+
+export interface CartItemData {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+}
+
+export interface CartItem {
+  product: CartItemData;
+  quantity: number;
+}
+
+export interface Cart {
+  items: CartItem[];
+  totalPrice: number;
+}

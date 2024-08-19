@@ -1,0 +1,48 @@
+.icon-container {
+  background-color: transparent;
+  border: none;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.cart-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 380px;
+  height: 100vh;
+  overflow: scroll;
+  background-color: #ffffff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: all 0.8s ease-in;
+  z-index: 1200;
+  display: none;
+}
+
+.cart-panel.open {
+  display: block;
+}
+
+.cart-header {
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: white;
+}
+.cart-content {
+  padding: 16px;
+  height: 100%;
+  overflow-y: auto;
+  border-top: 1px solid rgb(176, 176, 176);
+}
+.cart-footer {
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  width: 100%;
+  margin-top: 10px;
+}
