@@ -7,3 +7,7 @@ export enum ProductEndpoints {
   CategoryList = `${ApiBase.Products}/category-list`,
   Category = `${ApiBase.Products}/category`,
 }
+
+export enum StorageKeys {
+  CartItems = 'cart-items',
+}

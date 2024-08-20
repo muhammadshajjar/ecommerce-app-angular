@@ -39,4 +39,8 @@ export class ProductService {
   getSelectedCategoryProducts(category: string) {
     return this.handleApiCall(`${ProductEndpoints.Category}/${category}`);
   }
+
+  getProductById(id: number) {
+    return this.handleApiCall(`${ApiBase.Products}/${id}`);
+  }
 }

@@ -60,3 +60,8 @@ export interface Cart {
   items: CartItem[];
   totalPrice: number;
 }
+
+export interface StoreCart {
+  id: number;
+  quantity: number;
+}
