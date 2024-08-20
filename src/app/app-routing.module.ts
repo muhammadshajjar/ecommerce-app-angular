@@ -8,6 +8,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/home-page/home.module').then((m) => m.HomeModule),
   },
+  {
+    path: 'edit',
+    loadChildren: () =>
+      import('./pages/edit-page/edit-page.module').then(
+        (m) => m.EditPageModule,
+      ),
+  },
 ];
 
 @NgModule({

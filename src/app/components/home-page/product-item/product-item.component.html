@@ -1,10 +1,15 @@
 <mat-card>
-  <div (click)="onPreviewDetail()" class="card__banner">
+  <div class="card__banner">
     <img
       mat-card-image
       [src]="product?.thumbnail"
       alt="product thumbnail image"
     />
+    <div class="card__edit">
+      <a [routerLink]="['/edit', product?.id]" mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </a>
+    </div>
   </div>
 
   <mat-card-content class="card__content">
