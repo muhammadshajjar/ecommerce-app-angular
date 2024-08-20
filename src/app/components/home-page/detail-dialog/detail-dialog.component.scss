@@ -19,3 +19,24 @@
 .icon {
   color: gold;
 }
+
+.dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.quantity-field {
+  width: 100px;
+  margin-right: 16px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.action-buttons button {
+  min-width: 100px;
+}
