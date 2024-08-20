@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Observable } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
+import { ApiResponse, PaginatedProductData } from '../../models/interfaces';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ export class HomeComponent {
   searchQuery: string = '';
   selectedCategory: string = '';
 
-  products$: Observable<any> | null = null;
+  products$: Observable<ApiResponse<PaginatedProductData>> | null = null;
 
   constructor(private productService: ProductService) {}
 

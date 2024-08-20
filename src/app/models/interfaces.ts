@@ -65,3 +65,20 @@ export interface StoreCart {
   id: number;
   quantity: number;
 }
+
+export interface CategoryList {
+  data: string[];
+}
+
+export interface PaginatedProductData {
+  limit: number;
+  products: Product[];
+  skip: number;
+  total: number;
+}
+
+export interface ApiResponse<T> {
+  state: string;
+  data?: T;
+  error?: any;
+}

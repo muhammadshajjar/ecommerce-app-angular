@@ -39,7 +39,7 @@
           </div>
         }
         @case ("loaded") {
-          @for (product of data.data.products; track product.id) {
+          @for (product of data.data?.products; track product.id) {
             <app-product-item [product]="product" />
           } @empty {
             <div class="feedback-container">

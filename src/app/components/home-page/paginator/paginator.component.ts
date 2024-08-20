@@ -7,7 +7,7 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrl: './paginator.component.scss',
 })
 export class PaginatorComponent {
-  @Input() totalProducts: number = 0;
+  @Input() totalProducts?: number = 0;
   @Output() pagination = new EventEmitter();
 
   onPaginationChange(value: PageEvent) {
