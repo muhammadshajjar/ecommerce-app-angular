@@ -1,1 +1,7 @@
-<p>edit-page works!</p>
+<div class="form-container">
+  @if (dataIsLoading) {
+    <mat-spinner />
+  } @else {
+    <app-product-form [productData]="productData" />
+  }
+</div>
