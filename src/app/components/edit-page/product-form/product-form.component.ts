@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from '../../../models/interfaces';
+import { ProductService } from '../../../services/product.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-product-form',
@@ -10,8 +13,15 @@ import { Product } from '../../../models/interfaces';
 export class ProductFormComponent {
   productForm: FormGroup;
   private _productData: Product | undefined;
+  isEditing: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) {
+  private destroy$ = new Subject<void>();
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private productService: ProductService,
+    private snakBar: MatSnackBar,
+  ) {
     this.productForm = this.formBuilder.group({
       title: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
@@ -32,11 +42,29 @@ export class ProductFormComponent {
 
   onEditFormSubmit() {
     if (this.productForm.valid) {
-      console.log(this.productForm.value);
+      this.isEditing = true;
+      const productId = this._productData?.id;
+
+      this.productService
+        .updateProductData(this.productForm.value, productId)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (response) => {
+            if (response.state === 'loaded') {
+              this.openSnackBar('Product updated successfully', 'Done');
+            }
+          },
+          error: (err) => {
+            console.error('Error updating product:', err);
+          },
+          complete: () => {
+            this.isEditing = false;
+          },
+        });
     }
   }
 
-  private updateForm(): void {
+  private updateForm() {
     if (this._productData) {
       this.productForm.patchValue({
         title: this._productData.title,
@@ -49,5 +77,14 @@ export class ProductFormComponent {
         category: this._productData.category,
       });
     }
+  }
+
+  private openSnackBar(message: string, action: string) {
+    this.snakBar.open(message, action, { duration: 3000 });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

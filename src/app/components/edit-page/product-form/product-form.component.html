@@ -77,6 +77,12 @@
 
   <div>
     <a mat-stroked-button routerLink="/home">Go back</a>
-    <button mat-flat-button type="submit" color="primary">Edit</button>
+    <button mat-flat-button type="submit" color="primary">
+      @if (isEditing) {
+        Editing....
+      } @else {
+        Edit
+      }
+    </button>
   </div>
 </form>
