@@ -6,8 +6,8 @@ import {
   ApiResponse,
   CategoryList,
   PaginatedProductData,
+  Product,
 } from '../models/interfaces';
-import { Product } from '../models/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -17,9 +17,17 @@ export class ProductService {
 
   private handleApiCall<T>(
     url: string,
+    method: 'GET' | 'POST' | 'PATCH' | 'PUT',
     params?: HttpParams,
+    body?: any,
   ): Observable<ApiResponse<T>> {
-    return this.http.get<T>(url, { params }).pipe(
+    const options = {
+      params,
+      body,
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    return this.http.request<T>(method, url, options).pipe(
       map((data) => ({ state: 'loaded', data })),
       retry({ count: 2, delay: 2000 }),
       catchError((error) => of({ state: 'error', error: error.message })),
@@ -36,7 +44,11 @@ export class ProductService {
       .set('limit', pageSize.toString())
       .set('skip', (pageIndex * pageSize).toString());
 
-    return this.handleApiCall<PaginatedProductData>(ApiBase.Products, params);
+    return this.handleApiCall<PaginatedProductData>(
+      ApiBase.Products,
+      'GET',
+      params,
+    );
   }
 
   getSearchedProduct(
@@ -45,12 +57,16 @@ export class ProductService {
     const params = new HttpParams().set('q', query);
     return this.handleApiCall<PaginatedProductData>(
       `${ProductEndpoints.Search}`,
+      'GET',
       params,
     );
   }
 
   getProductCategoriesList(): Observable<ApiResponse<CategoryList>> {
-    return this.handleApiCall<CategoryList>(`${ProductEndpoints.CategoryList}`);
+    return this.handleApiCall<CategoryList>(
+      `${ProductEndpoints.CategoryList}`,
+      'GET',
+    );
   }
 
   getSelectedCategoryProducts(
@@ -58,10 +74,25 @@ export class ProductService {
   ): Observable<ApiResponse<PaginatedProductData>> {
     return this.handleApiCall<PaginatedProductData>(
       `${ProductEndpoints.Category}/${category}`,
+      'GET',
     );
   }
 
   getProductById(id: number): Observable<ApiResponse<Product>> {
-    return this.handleApiCall<Product>(`${ApiBase.Products}/${id}`);
+    return this.handleApiCall<Product>(`${ApiBase.Products}/${id}`, 'GET');
+  }
+
+  updateProductData(
+    updatedData: Product,
+    id: any,
+  ): Observable<ApiResponse<Product>> {
+    const body = updatedData;
+    console.log(body);
+    return this.handleApiCall<Product>(
+      `${ApiBase.Products}/${id}`,
+      'PATCH',
+      undefined,
+      body,
+    );
   }
 }
