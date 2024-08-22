@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, NgOptimizedImage } from '@angular/common';
 
 import { HomeComponent } from './home.component';
 import { SearchComponent } from '../../components/home-page/search/search.component';
@@ -55,6 +55,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeComponent }];
     MatOptionModule,
     MatButtonModule,
     MatDialogModule,
+    NgOptimizedImage,
   ],
 })
 export class HomeModule {}
