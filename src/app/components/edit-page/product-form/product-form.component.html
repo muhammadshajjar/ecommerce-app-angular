@@ -78,8 +78,18 @@
   <div>
     <a mat-stroked-button routerLink="/home">Go back</a>
     <button mat-flat-button type="submit" color="primary">
-      @if (isEditing) {
-        Editing....
+      @if (productUpdateResult$ | async; as response) {
+        @switch (response.state) {
+          @case ("loading") {
+            <p>Editing...</p>
+          }
+          @case ("error") {
+            <p>Error: {{ response.error }}</p>
+          }
+          @case ("loaded") {
+            <p>Edit</p>
+          }
+        }
       } @else {
         Edit
       }

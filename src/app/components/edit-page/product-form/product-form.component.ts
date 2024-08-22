@@ -1,9 +1,10 @@
+import { ApiResponse } from './../../../models/interfaces';
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from '../../../models/interfaces';
 import { ProductService } from '../../../services/product.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-product-form',
@@ -13,9 +14,8 @@ import { Subject, takeUntil } from 'rxjs';
 export class ProductFormComponent {
   productForm: FormGroup;
   private _productData: Product | undefined;
-  isEditing: boolean = false;
 
-  private destroy$ = new Subject<void>();
+  productUpdateResult$ = new Observable<ApiResponse<Product>>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,25 +42,17 @@ export class ProductFormComponent {
 
   onEditFormSubmit() {
     if (this.productForm.valid) {
-      this.isEditing = true;
       const productId = this._productData?.id;
 
-      this.productService
+      this.productUpdateResult$ = this.productService
         .updateProductData(this.productForm.value, productId)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: (response) => {
+        .pipe(
+          tap((response) => {
             if (response.state === 'loaded') {
               this.openSnackBar('Product updated successfully', 'Done');
             }
-          },
-          error: (err) => {
-            console.error('Error updating product:', err);
-          },
-          complete: () => {
-            this.isEditing = false;
-          },
-        });
+          }),
+        );
     }
   }
 
@@ -81,10 +73,5 @@ export class ProductFormComponent {
 
   private openSnackBar(message: string, action: string) {
     this.snakBar.open(message, action, { duration: 3000 });
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }
