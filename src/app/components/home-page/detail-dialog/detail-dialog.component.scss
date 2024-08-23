@@ -40,3 +40,17 @@
 .action-buttons button {
   min-width: 100px;
 }
+
+.close-dialog {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  &:hover {
+    cursor: pointer;
+  }
+  &:focus {
+    border: none;
+  }
+}
