@@ -28,7 +28,7 @@ export class ProductService {
     };
 
     return this.http.request<T>(method, url, options).pipe(
-      map((data) => ({ state: 'loaded', data })),
+      map((data: any) => this.transformApiResponse(data, options.params)),
       retry({ count: 2, delay: 2000 }),
       catchError((error) => of({ state: 'error', error: error.message })),
       startWith({ state: 'loading' }),
@@ -38,14 +38,14 @@ export class ProductService {
 
   getAllProducts(
     pageSize: number = 30,
-    pageIndex: number = 0,
+    pageIndex: number = 1,
   ): Observable<ApiResponse<PaginatedProductData>> {
     const params = new HttpParams()
-      .set('limit', pageSize.toString())
-      .set('skip', (pageIndex * pageSize).toString());
+      .set('_page', pageIndex.toString())
+      .set('_limit', pageSize.toString());
 
     return this.handleApiCall<PaginatedProductData>(
-      ApiBase.Products,
+      ApiBase.ProductsOnJsonServer,
       'GET',
       params,
     );
@@ -54,9 +54,11 @@ export class ProductService {
   getSearchedProduct(
     query: string,
   ): Observable<ApiResponse<PaginatedProductData>> {
-    const params = new HttpParams().set('q', query);
+    const params = new HttpParams().set('title_like', query);
+
+    console.log(query);
     return this.handleApiCall<PaginatedProductData>(
-      `${ProductEndpoints.Search}`,
+      `${ApiBase.ProductsOnJsonServer}`,
       'GET',
       params,
     );
@@ -64,7 +66,7 @@ export class ProductService {
 
   getProductCategoriesList(): Observable<ApiResponse<CategoryList>> {
     return this.handleApiCall<CategoryList>(
-      `${ProductEndpoints.CategoryList}`,
+      `${ApiBase.CategoriesOnJsonServer}`,
       'GET',
     );
   }
@@ -72,14 +74,19 @@ export class ProductService {
   getSelectedCategoryProducts(
     category: string,
   ): Observable<ApiResponse<PaginatedProductData>> {
+    const params = new HttpParams().set('category', category);
     return this.handleApiCall<PaginatedProductData>(
-      `${ProductEndpoints.Category}/${category}`,
+      `${ApiBase.ProductsOnJsonServer}`,
       'GET',
+      params,
     );
   }
 
   getProductById(id: number): Observable<ApiResponse<Product>> {
-    return this.handleApiCall<Product>(`${ApiBase.Products}/${id}`, 'GET');
+    return this.handleApiCall<Product>(
+      `${ApiBase.ProductsOnJsonServer}/${id}`,
+      'GET',
+    );
   }
 
   updateProductData(
@@ -87,12 +94,30 @@ export class ProductService {
     id: any,
   ): Observable<ApiResponse<Product>> {
     const body = updatedData;
-    console.log(body);
     return this.handleApiCall<Product>(
-      `${ApiBase.Products}/${id}`,
+      `${ApiBase.ProductsOnJsonServer}/${id}`,
       'PATCH',
       undefined,
       body,
     );
+  }
+  transformApiResponse(data: any, params?: HttpParams) {
+    if (
+      params?.has('_page') ||
+      params?.has('category') ||
+      params?.has('title_like')
+    ) {
+      return {
+        state: 'loaded',
+        data: {
+          products: data,
+          limit: 0,
+          skip: 0,
+          total: data.length,
+        },
+      };
+    } else {
+      return { state: 'loaded', data };
+    }
   }
 }
