@@ -5,7 +5,9 @@
     [formControl]="searchControl"
     placeholder="Type to search..."
   />
-  <button mat-icon-button matSuffix (click)="onSearch()">
-    <mat-icon>search</mat-icon>
-  </button>
+  @if (searchControl.value) {
+    <button mat-icon-button matSuffix (click)="clearSearch()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  }
 </mat-form-field>

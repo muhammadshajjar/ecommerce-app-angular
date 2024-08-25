@@ -9,7 +9,17 @@
         [priority]="product.id < 6 ? true : false"
       />
     </div>
-    <div class="card__edit">
+    <div class="card__actions">
+      <button mat-icon-button (click)="onDeleteProduct()">
+        @if (productDeleteResult$ | async; as response) {
+          @switch (response.state) {
+            @case ("loading") {}
+            @case ("loaded") {}
+          }
+        } @else {
+          <mat-icon>delete</mat-icon>
+        }
+      </button>
       <a [routerLink]="['/edit', product.id]" mat-icon-button>
         <mat-icon>edit</mat-icon>
       </a>

@@ -40,7 +40,10 @@
         }
         @case ("loaded") {
           @for (product of data.data?.products; track product.id) {
-            <app-product-item [product]="product" />
+            <app-product-item
+              [product]="product"
+              (productDeleted)="onProductDelete()"
+            />
           } @empty {
             <div class="feedback-container">
               <p>No products Found!</p>

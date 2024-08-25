@@ -17,7 +17,7 @@ export class ProductService {
 
   private handleApiCall<T>(
     url: string,
-    method: 'GET' | 'POST' | 'PATCH' | 'PUT',
+    method: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE',
     params?: HttpParams,
     body?: any,
   ): Observable<ApiResponse<T>> {
@@ -101,6 +101,14 @@ export class ProductService {
       body,
     );
   }
+
+  deleteProduct(id: any): Observable<ApiResponse<void>> {
+    return this.handleApiCall<void>(
+      `${ApiBase.ProductsOnJsonServer}/${id}`,
+      'DELETE',
+    );
+  }
+
   transformApiResponse(data: any, params?: HttpParams) {
     if (
       params?.has('_page') ||

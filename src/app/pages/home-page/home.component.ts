@@ -30,9 +30,17 @@ export class HomeComponent {
 
   onSearchQuery(query: string): void {
     this.selectedCategory = '';
-    this.searchQuery = query;
+    this.searchQuery = query?.trim();
 
-    this.products$ = this.productService.getSearchedProduct(this.searchQuery);
+    if (this.searchQuery) {
+      this.products$ = this.productService.getSearchedProduct(this.searchQuery);
+    } else {
+      this.products$ = this.productService.getAllProducts();
+    }
+  }
+
+  onProductDelete() {
+    this.products$ = this.productService.getAllProducts();
   }
 
   onCategoryChange(category: string): void {
