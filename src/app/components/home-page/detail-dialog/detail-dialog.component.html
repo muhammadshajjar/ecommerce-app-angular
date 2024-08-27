@@ -1,18 +1,18 @@
 <mat-dialog-content>
-  <img class="product-image" [src]="data.images[0]" [alt]="data.title" />
+  <img class="product-image" [src]="data.thumbnail" [alt]="data.title" />
   <div>
     <h2>{{ data.title }}</h2>
     <div class="product-heading">
       <h3>{{ data.price | currency }}</h3>
       <div class="rating">
         <mat-icon class="star-icon" class="icon">star</mat-icon>
-        <span>({{ data.rating }})</span>
+        <span>({{ data.rating || 0 }})</span>
       </div>
     </div>
   </div>
   <p>{{ data.description }}</p>
   <ul>
-    <li>Availability: {{ data.availabilityStatus }}</li>
+    <li>Availability: {{ data.stock > 0 ? "In Stock" : "Out of Stock" }}</li>
     <li>SKU: {{ data.sku }}</li>
     <li>Shipping: {{ data.shippingInformation }}</li>
     <li>Warranty: {{ data.warrantyInformation }}</li>

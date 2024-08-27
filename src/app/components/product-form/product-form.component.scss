@@ -1,0 +1,27 @@
+.product-form {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+
+  & div {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+  }
+}
+
+.product-form-field {
+  width: 100%;
+}
+
+.file-upload {
+  margin-bottom: 20px;
+  img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    margin-top: 15px;
+    max-width: 100px;
+    max-height: 100px;
+  }
+}

@@ -102,6 +102,16 @@ export class ProductService {
     );
   }
 
+  addProduct(productData: Product) {
+    const body = productData;
+    return this.handleApiCall<Product>(
+      `${ApiBase.ProductsOnJsonServer}`,
+      'POST',
+      undefined,
+      body,
+    );
+  }
+
   deleteProduct(id: any): Observable<ApiResponse<void>> {
     return this.handleApiCall<void>(
       `${ApiBase.ProductsOnJsonServer}/${id}`,

@@ -15,6 +15,11 @@ const routes: Routes = [
         (m) => m.EditPageModule,
       ),
   },
+  {
+    path: 'add',
+    loadChildren: () =>
+      import('./pages/add-page/add-page.module').then((m) => m.AddPageModule),
+  },
 ];
 
 @NgModule({

@@ -3,10 +3,8 @@
     <div class="card__banner" (click)="onPreviewDetail()">
       <img
         mat-card-image
-        [ngSrc]="product.thumbnail"
+        [src]="product.thumbnail"
         alt="product thumbnail image"
-        fill
-        [priority]="product.id < 6 ? true : false"
       />
     </div>
     <div class="card__actions">
@@ -28,8 +26,8 @@
       <div class="card__desc">
         <h2>{{ product.title }}</h2>
         <p>
-          {{ product.price | currency }}
-          <sup>{{ calculateDiscountedPrice() | currency }}</sup>
+          {{ calculateDiscountedPrice() | currency }}
+          <sup>{{ product.price | currency }}</sup>
         </p>
       </div>
       <div class="card__cart">

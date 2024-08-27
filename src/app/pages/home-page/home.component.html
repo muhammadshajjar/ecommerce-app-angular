@@ -23,6 +23,9 @@
     <button mat-flat-button (click)="clearAll()">Clear All</button>
   }
 </section>
+<section class="container add-product">
+  <button mat-flat-button routerLink="/add">Add Product</button>
+</section>
 
 <section class="container">
   @if (products$ | async; as data) {
