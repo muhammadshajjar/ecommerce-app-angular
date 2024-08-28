@@ -15,6 +15,7 @@ import { CurrencyPipe } from '@angular/common';
 export class CartItemComponent {
   constructor(private cartService: CartService) {}
   @Input() item: CartItem | null = null;
+  @Input() showActions: boolean = true;
 
   onAddToCart(item: CartItemData) {
     this.cartService.addItemToCart(item);

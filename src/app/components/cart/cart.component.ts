@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { MatMenuModule } from '@angular/material/menu';
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { Cart } from '../../models/interfaces';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -20,6 +21,7 @@ import { Cart } from '../../models/interfaces';
     MatButtonModule,
     CommonModule,
     AsyncPipe,
+    RouterLink,
   ],
 
   templateUrl: './cart.component.html',

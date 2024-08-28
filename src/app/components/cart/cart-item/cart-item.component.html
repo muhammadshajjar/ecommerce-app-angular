@@ -9,13 +9,15 @@
         </p>
       </div>
     </div>
-    <div class="cart-actions">
-      <button mat-mini-fab (click)="onAddToCart(item.product)">
-        <mat-icon class="icon">add</mat-icon>
-      </button>
-      <button mat-mini-fab (click)="onRemoveFromCart(item.product.id)">
-        <mat-icon class="icon">remove</mat-icon>
-      </button>
-    </div>
+    @if (showActions) {
+      <div class="cart-actions">
+        <button mat-icon-button (click)="onAddToCart(item.product)">
+          <mat-icon class="icon">add</mat-icon>
+        </button>
+        <button mat-icon-button (click)="onRemoveFromCart(item.product.id)">
+          <mat-icon class="icon">remove</mat-icon>
+        </button>
+      </div>
+    }
   </li>
 }

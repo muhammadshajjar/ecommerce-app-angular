@@ -25,24 +25,25 @@
 }
 
 .cart-header {
-  display: flex;
-  gap: 10px;
   padding: 14px;
   position: sticky;
   top: 0;
   z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: white;
+  div {
+    display: flex;
+    gap: 10px;
+  }
 }
 .cart-content {
   padding: 16px;
-  height: 100%;
-  overflow-y: auto;
+  height: 80%;
+  overflow-y: scroll;
   border-top: 1px solid rgb(176, 176, 176);
 }
 .cart-footer {
-  position: fixed;
-  bottom: 0;
-  background-color: white;
-  width: 100%;
-  margin-top: 10px;
+  text-align: center;
 }

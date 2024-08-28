@@ -10,10 +10,13 @@
 
   <div class="cart-panel" [ngClass]="{ open: isCartOpen }">
     <div class="cart-header">
-      <button class="icon-container">
-        <mat-icon class="icon" (click)="toggleCart()">close</mat-icon>
-      </button>
-      <p>Your Cart</p>
+      <div>
+        <button class="icon-container">
+          <mat-icon class="icon" (click)="toggleCart()">close</mat-icon>
+        </button>
+        <p>Your Cart</p>
+      </div>
+      <button mat-button (click)="onClearCart()">Clear Cart</button>
     </div>
     <div class="cart-content">
       @for (item of cart.items; track item.product.id) {
@@ -21,10 +24,12 @@
       } @empty {
         <p>Your Cart is Empty!</p>
       }
-      <div class="cart-footer">
-        <p>Sub Total: {{ cart.totalPrice | currency }}</p>
-        <button mat-button (click)="onClearCart()">Clear Cart</button>
-      </div>
+    </div>
+    <div class="cart-footer">
+      <p>Total: {{ cart.totalPrice | currency }}</p>
+      @if (cart.items.length > 0) {
+        <a routerLink="/checkout" mat-button> Checkout Now </a>
+      }
     </div>
   </div>
 }
