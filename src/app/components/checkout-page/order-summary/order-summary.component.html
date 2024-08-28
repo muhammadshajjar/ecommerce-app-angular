@@ -1,0 +1,34 @@
+<div class="order-summary">
+  <h2>Review your cart</h2>
+
+  @if (cart$ | async; as cart) {
+    <div class="cart-items">
+      @for (item of cart.items; track item.product.id) {
+        <app-cart-item [item]="item" [showActions]="false" />
+      }
+    </div>
+    <div class="pricing">
+      <div>
+        <p>Subtotal</p>
+        <span>{{ cart.totalPrice | currency }}</span>
+      </div>
+      <div>
+        <p>Shipping</p>
+        <span>{{ shippingCost | currency }}</span>
+      </div>
+      <div class="total">
+        <p>Total</p>
+        <span>{{ shippingCost + cart.totalPrice | currency }}</span>
+      </div>
+    </div>
+  }
+
+  <button
+    [disabled]="!shippingFormData"
+    mat-flat-button
+    class="pay-btn"
+    (click)="onPayment()"
+  >
+    Pay now
+  </button>
+</div>

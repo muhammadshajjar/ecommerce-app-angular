@@ -82,3 +82,12 @@ export interface ApiResponse<T> {
   data?: T;
   error?: any;
 }
+
+export interface ShippingForm {
+  deliveryMethod: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  city: string;
+  termsAccepted: boolean;
+}

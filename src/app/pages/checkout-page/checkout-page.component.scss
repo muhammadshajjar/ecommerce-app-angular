@@ -1,0 +1,39 @@
+.checkout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+
+  h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+  }
+}
+
+.checkout-content {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgb(224, 224, 224);
+  height: 100vh;
+  padding: 0 50px;
+
+  .shipping-info {
+    padding: 80px;
+    width: 60%;
+    border-right: 1px solid rgb(224, 224, 224);
+  }
+  .order-summary {
+    padding: 80px;
+    width: 40%;
+  }
+}
+
+.order-confirmed {
+  text-align: center;
+  margin: 150px auto;
+
+  p {
+    margin-bottom: 20px;
+  }
+}
