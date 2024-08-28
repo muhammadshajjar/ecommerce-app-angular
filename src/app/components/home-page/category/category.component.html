@@ -1,26 +1,11 @@
-<mat-form-field appearance="outline">
-  <mat-label>Select Category</mat-label>
-  <mat-select
-    [formControl]="categoryControl"
-    (selectionChange)="onSelectCategory($event.value)"
-  >
-    <ng-container *ngIf="categories$ | async as categories">
-      <ng-container [ngSwitch]="categories.state">
-        <mat-option *ngSwitchCase="'loading'" disabled>
-          categories are loading...
-        </mat-option>
-        <mat-option *ngSwitchCase="'error'" disabled>
-          Error: {{ categories.error }}
-        </mat-option>
-        <ng-container *ngSwitchCase="'loaded'">
-          <mat-option
-            *ngFor="let category of categories.data"
-            [value]="category"
-          >
-            {{ category }}
-          </mat-option>
-        </ng-container>
-      </ng-container>
-    </ng-container>
-  </mat-select>
-</mat-form-field>
+<mat-chip-listbox [formControl]="categoryControl">
+  <div class="category-chips">
+    @if (categories$ | async; as categories) {
+      @if (categories.state === "loaded") {
+        @for (category of categories.data; track category) {
+          <mat-chip-option>{{ category }}</mat-chip-option>
+        }
+      }
+    }
+  </div>
+</mat-chip-listbox>

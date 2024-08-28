@@ -24,7 +24,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DetailDialogComponent } from '../../components/home-page/detail-dialog/detail-dialog.component';
-
+import { MatChipsModule } from '@angular/material/chips';
 const homeRoutes: Routes = [{ path: '', component: HomeComponent }];
 
 @NgModule({
@@ -56,6 +56,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeComponent }];
     MatButtonModule,
     MatDialogModule,
     NgOptimizedImage,
+    MatChipsModule,
   ],
 })
 export class HomeModule {}

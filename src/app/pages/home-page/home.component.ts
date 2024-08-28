@@ -44,18 +44,15 @@ export class HomeComponent {
   }
 
   onCategoryChange(category: string): void {
-    this.searchQuery = '';
-    this.selectedCategory = category;
+    if (category) {
+      this.searchQuery = '';
+      this.selectedCategory = category;
 
-    this.products$ = this.productService.getSelectedCategoryProducts(
-      this.selectedCategory,
-    );
-  }
-
-  clearAll(): void {
-    this.searchQuery = '';
-    this.selectedCategory = '';
-
-    this.products$ = this.productService.getAllProducts();
+      this.products$ = this.productService.getSelectedCategoryProducts(
+        this.selectedCategory,
+      );
+    } else {
+      this.products$ = this.productService.getAllProducts();
+    }
   }
 }

@@ -1,28 +1,14 @@
 <section class="actions container">
-  <app-search (searchQuery)="onSearchQuery($event)" />
+  <app-search
+    (searchQuery)="onSearchQuery($event)"
+    [searchedQuery]="searchQuery"
+  />
   <app-category
     (selectCategory)="onCategoryChange($event)"
     [selectedCategory]="selectedCategory"
   />
 </section>
 
-<section class="results container">
-  @if (searchQuery || selectedCategory) {
-    <div class="results-info">
-      <span>Results for:</span>
-      @if (searchQuery) {
-        <p>
-          {{ searchQuery }}
-        </p>
-      } @else {
-        <p>
-          {{ selectedCategory }}
-        </p>
-      }
-    </div>
-    <button mat-flat-button (click)="clearAll()">Clear All</button>
-  }
-</section>
 <section class="container add-product">
   <button mat-flat-button routerLink="/add">Add Product</button>
 </section>
