@@ -1,12 +1,21 @@
-import { ApiResponse, Product } from './../../models/interfaces';
+import {
+  ApiResponse,
+  Product,
+  ConfirmationDialogData,
+} from './../../models/interfaces';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { FormGroup } from '@angular/forms';
-import { lastValueFrom, Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from '../../components/edit-page/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from './../../components/confirmation-dialog/confirmation-dialog.component';
+
+const dialogData: ConfirmationDialogData = {
+  title: 'Confirm Deletion',
+  desc: 'Are you sure you want to delete this product? This action cannot be undone.',
+};
 
 @Component({
   selector: 'app-edit-page',
@@ -16,7 +25,6 @@ import { ConfirmationDialogComponent } from '../../components/edit-page/confirma
 export class EditPageComponent {
   productForm: FormGroup = new FormGroup({});
   productData: Product | undefined;
-  dataIsLoading: boolean = true;
   productId: string | undefined;
 
   constructor(
@@ -27,47 +35,52 @@ export class EditPageComponent {
     private router: Router,
   ) {}
 
+  productData$ = new Observable<ApiResponse<Product>>();
   productDeleteResult$ = new Observable<ApiResponse<void>>();
 
-  async ngOnInit() {
+  ngOnInit() {
     const productID = this.activatedRoutes.snapshot.params['productId'];
 
     this.productId = productID;
-    // convert observable to promise
-    try {
-      const productResponse = await lastValueFrom(
-        this.productService.getProductById(productID),
-      );
-      this.dataIsLoading = false;
-      this.productData = productResponse?.data;
-    } catch (err) {
-      console.log(err);
-    }
+
+    this.productData$ = this.productService.getProductById(productID).pipe(
+      tap((response) => {
+        if (response.state === 'loaded') {
+          this.productData = response.data;
+        }
+      }),
+    );
   }
 
   onDeleteProduct() {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: dialogData,
+    });
 
     dialogRef.componentInstance.confirmClicked.subscribe((confirmation) => {
       if (confirmation) {
-        this.productDeleteResult$ = this.productService
-          .deleteProduct(this.productId)
-          .pipe(
-            tap((response) => {
-              if (response.state === 'loaded') {
-                this.openSnackBar('Product Deleted successfully', 'Done');
-
-                this.router.navigateByUrl('/home');
-              }
-              if (response.state === 'error') {
-                this.openSnackBar('Something Went Wrong!', 'Done');
-              }
-            }),
-          );
+        this.deleteProduct();
         dialogRef.close();
       }
     });
   }
+
+  private deleteProduct() {
+    this.productDeleteResult$ = this.productService
+      .deleteProduct(this.productId)
+      .pipe(tap((response) => this.handleDeleteProductResponse(response)));
+  }
+
+  private handleDeleteProductResponse(response: ApiResponse<void>) {
+    if (response.state === 'loaded') {
+      this.openSnackBar('Product Deleted successfully', 'Done');
+      this.router.navigateByUrl('/home');
+    }
+    if (response.state === 'error') {
+      this.openSnackBar('Something Went Wrong!', 'Done');
+    }
+  }
+
   private openSnackBar(message: string, action: string) {
     this.snakBar.open(message, action, { duration: 3000 });
   }

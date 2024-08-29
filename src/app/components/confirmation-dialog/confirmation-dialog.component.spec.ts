@@ -8,7 +8,7 @@ describe('ConfirmationDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ConfirmationDialogComponent]
+      imports: [ConfirmationDialogComponent]
     })
     .compileComponents();
 

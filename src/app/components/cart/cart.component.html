@@ -16,7 +16,9 @@
         </button>
         <p>Your Cart</p>
       </div>
-      <button mat-button (click)="onClearCart()">Clear Cart</button>
+      @if (cart.items.length > 0) {
+        <button mat-button (click)="onClearCart()">Clear Cart</button>
+      }
     </div>
     <div class="cart-content">
       @for (item of cart.items; track item.product.id) {

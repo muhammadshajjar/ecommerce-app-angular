@@ -6,20 +6,21 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductFormComponent } from '../../components/product-form/product-form.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from '../../components/edit-page/confirmation-dialog/confirmation-dialog.component';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 const editRoutes: Routes = [
   { path: ':productId', component: EditPageComponent },
 ];
 
 @NgModule({
-  declarations: [EditPageComponent, ConfirmationDialogComponent],
+  declarations: [EditPageComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(editRoutes),
     ProductFormComponent,
     MatButtonModule,
     MatDialogModule,
+    MatProgressSpinner,
   ],
 })
 export class EditPageModule {}

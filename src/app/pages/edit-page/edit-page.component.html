@@ -14,5 +14,17 @@
     </button>
   </div>
 
-  <app-product-form [productData]="productData" />
+  @if (productData$ | async; as response) {
+    @switch (response.state) {
+      @case ("loading") {
+        <mat-spinner />
+      }
+      @case ("error") {
+        <p>Error: {{ response.error }}</p>
+      }
+      @case ("loaded") {
+        <app-product-form [productData]="productData" />
+      }
+    }
+  }
 </div>

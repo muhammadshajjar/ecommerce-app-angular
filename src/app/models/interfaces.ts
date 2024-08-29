@@ -91,3 +91,7 @@ export interface ShippingForm {
   city: string;
   termsAccepted: boolean;
 }
+export interface ConfirmationDialogData {
+  title: string;
+  desc: string;
+}
