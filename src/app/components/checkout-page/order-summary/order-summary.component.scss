@@ -6,7 +6,7 @@
 }
 
 .cart-items {
-  height: 400px;
+  height: 370px;
   overflow: scroll;
 }
 
@@ -32,6 +32,11 @@
   }
 }
 
-.pay-btn {
-  width: 100%;
+.order-summary-actions {
+  display: flex;
+  flex-direction: column;
+
+  .shopping-btn {
+    margin-top: 5px;
+  }
 }

@@ -23,12 +23,17 @@
     </div>
   }
 
-  <button
-    [disabled]="!shippingFormData"
-    mat-flat-button
-    class="pay-btn"
-    (click)="onPayment()"
-  >
-    Pay now
-  </button>
+  <div class="order-summary-actions">
+    <button
+      [disabled]="!shippingFormData"
+      mat-flat-button
+      class="pay-btn"
+      (click)="onPayment()"
+    >
+      Pay now
+    </button>
+    <button class="shopping-btn" mat-button routerLink="/home">
+      Continue Shopping
+    </button>
+  </div>
 </div>
