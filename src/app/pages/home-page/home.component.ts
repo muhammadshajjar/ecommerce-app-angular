@@ -39,10 +39,6 @@ export class HomeComponent {
     }
   }
 
-  onProductDelete() {
-    this.products$ = this.productService.getAllProducts();
-  }
-
   onCategoryChange(category: string): void {
     if (category) {
       this.searchQuery = '';

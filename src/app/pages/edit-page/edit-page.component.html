@@ -1,4 +1,18 @@
 <div class="container edit-product">
-  <h1>Edit Product</h1>
+  <div>
+    <h1>Edit Product</h1>
+    <button mat-flat-button class="delete-btn" (click)="onDeleteProduct()">
+      @if (productDeleteResult$ | async; as response) {
+        @switch (response.state) {
+          @case ("loading") {
+            Deleting....
+          }
+        }
+      } @else {
+        Delete Product
+      }
+    </button>
+  </div>
+
   <app-product-form [productData]="productData" />
 </div>
