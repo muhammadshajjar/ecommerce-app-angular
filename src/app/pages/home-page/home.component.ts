@@ -3,6 +3,7 @@ import { ProductService } from '../../services/product.service';
 import { Observable } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import { ApiResponse, PaginatedProductData } from '../../models/interfaces';
+import { UIControlService } from '../../services/uicontrol.service';
 
 @Component({
   selector: 'app-home',
@@ -15,10 +16,14 @@ export class HomeComponent {
 
   products$: Observable<ApiResponse<PaginatedProductData>> | null = null;
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private uiControlService: UIControlService,
+  ) {}
 
   ngOnInit(): void {
     this.products$ = this.productService.getAllProducts();
+    this.uiControlService.setCartVisibility(true);
   }
 
   onPaginationChange(pageEvent: PageEvent): void {
@@ -50,5 +55,9 @@ export class HomeComponent {
     } else {
       this.products$ = this.productService.getAllProducts();
     }
+  }
+
+  ngOnDestroy() {
+    this.uiControlService.setCartVisibility(false);
   }
 }
