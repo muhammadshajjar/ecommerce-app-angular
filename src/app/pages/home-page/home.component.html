@@ -15,19 +15,19 @@
 
 <section class="container">
   @if (products$ | async; as data) {
-    <div class="products">
-      @switch (data.state) {
-        @case ("loading") {
-          <div class="feedback-container">
-            <mat-spinner />
-          </div>
-        }
-        @case ("error") {
-          <div class="feedback-container">
-            <p>Error: {{ data.error }}</p>
-          </div>
-        }
-        @case ("loaded") {
+    @switch (data.state) {
+      @case ("loading") {
+        <div class="feedback-container">
+          <mat-spinner />
+        </div>
+      }
+      @case ("error") {
+        <div class="feedback-container">
+          <p>Error: {{ data.error }}</p>
+        </div>
+      }
+      @case ("loaded") {
+        <div class="products">
           @for (product of data.data?.products; track product.id) {
             <app-product-item [product]="product" />
           } @empty {
@@ -35,9 +35,9 @@
               <p>No products Found!</p>
             </div>
           }
-        }
+        </div>
       }
-    </div>
+    }
     <app-paginator
       (pagination)="onPaginationChange($event)"
       [totalProducts]="data?.data?.total"

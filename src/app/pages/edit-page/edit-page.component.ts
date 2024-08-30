@@ -6,6 +6,7 @@ import {
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
+import { CartService } from './../../services/cart.service';
 import { FormGroup } from '@angular/forms';
 import { Observable, tap } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -33,6 +34,7 @@ export class EditPageComponent {
     private snakBar: MatSnackBar,
     private dialog: MatDialog,
     private router: Router,
+    private cartService: CartService,
   ) {}
 
   productData$ = new Observable<ApiResponse<Product>>();
@@ -75,6 +77,9 @@ export class EditPageComponent {
     if (response.state === 'loaded') {
       this.openSnackBar('Product Deleted successfully', 'Done');
       this.router.navigateByUrl('/home');
+
+      // remove product from cart if the product is deleted
+      this.removeProductFromCart();
     }
     if (response.state === 'error') {
       this.openSnackBar('Something Went Wrong!', 'Done');
@@ -83,5 +88,10 @@ export class EditPageComponent {
 
   private openSnackBar(message: string, action: string) {
     this.snakBar.open(message, action, { duration: 3000 });
+  }
+
+  private removeProductFromCart() {
+    this.productData &&
+      this.cartService.removeItemFromCart(this.productData.id);
   }
 }

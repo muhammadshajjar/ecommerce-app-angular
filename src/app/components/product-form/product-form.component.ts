@@ -11,7 +11,7 @@ import { AsyncPipe } from '@angular/common';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ApiResponse, Product } from '../../models/interfaces';
 import { Observable, tap } from 'rxjs';
 import { MatOption } from '@angular/material/core';
@@ -50,7 +50,6 @@ export class ProductFormComponent {
     if (data) {
       this._productData = data;
       this.isEditMode = true;
-      console.log('here');
       this.updateForm();
     }
   }
@@ -59,6 +58,7 @@ export class ProductFormComponent {
     private formBuilder: FormBuilder,
     private productService: ProductService,
     private snakBar: MatSnackBar,
+    private router: Router,
   ) {
     this.productForm = this.initializeForm();
   }
@@ -117,6 +117,7 @@ export class ProductFormComponent {
         tap((response) => {
           if (response.state === 'loaded') {
             this.openSnackBar('Product Addded successfully', 'Done');
+            this.router.navigateByUrl('/home');
           }
         }),
       );
