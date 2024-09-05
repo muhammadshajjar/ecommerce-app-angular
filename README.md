@@ -1,27 +1,66 @@
-# EcommerceApp
+# Ecommerce Store - Angular Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.1.
+This is an **Ecommerce Store** built using **Angular**. The project showcases an ecommerce platform with product CRUD, category filtering, search functionality, pagination, add, remove to cart and checkout page. It connects to a mock backend (JSON server) for managing product data.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Project Setup
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Prerequisites
+Make sure you have the following installed:
+- **Node.js** 
+- **npm** (Node Package Manager)
+- **Angular CLI** 
 
-## Build
+### Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. **Clone the repository:**
+   
+   ```bash
+   https://github.com/muhammadshajjar/ecommerce-app-angular.git
+   cd ecommerce-app-angular
+   ```
 
-## Running unit tests
+3. **Install dependencies:**
+   
+   ```bash
+   npm install
+    ```
+### Running the Application
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. **Start the JSON Server:**
+   
+    We use a JSON server to simulate a backend for product data. Run the following command to start the server:
+   
+   ```bash
+   npx json-server --watch db.json
+    ```
+   This will serve the db.json file located in the root directory, which contains mock product data.
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+2. **Start the Angular Application:**
 
-## Further help
+   After installing dependencies, start the application using:
+   
+   ```bash
+    npm start
+    ```
+    This will run the Angular app on `http://localhost:4200/`.
+   
+### Running the Test
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. **Unit Test:**
+   
+   To run the unit tests, use the following command:
+   
+   ```bash
+    ng test
+    ```
+   This will launch the test runner in the browser and run all the tests.
+
+### Demo
+
+  Please find demo video below
+
+https://github.com/user-attachments/assets/9047659b-8ee4-489a-88c1-b8f40bd5aa64
+
