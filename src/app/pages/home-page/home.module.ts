@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, NgOptimizedImage } from '@angular/common';
 
 import { HomeComponent } from './home.component';
 import { SearchComponent } from '../../components/home-page/search/search.component';
@@ -22,11 +22,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatOptionModule } from '@angular/material/core';
 import { RouterModule, Routes } from '@angular/router';
-import {
-  MatDialogModule,
-} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { DetailDialogComponent } from '../../components/home-page/detail-dialog/detail-dialog.component';
-
+import { MatChipsModule } from '@angular/material/chips';
 const homeRoutes: Routes = [{ path: '', component: HomeComponent }];
 
 @NgModule({
@@ -36,7 +34,7 @@ const homeRoutes: Routes = [{ path: '', component: HomeComponent }];
     CategoryComponent,
     PaginatorComponent,
     ProductItemComponent,
-    DetailDialogComponent
+    DetailDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -57,6 +55,8 @@ const homeRoutes: Routes = [{ path: '', component: HomeComponent }];
     MatOptionModule,
     MatButtonModule,
     MatDialogModule,
+    NgOptimizedImage,
+    MatChipsModule,
   ],
 })
 export class HomeModule {}

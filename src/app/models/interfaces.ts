@@ -43,3 +43,55 @@ export interface Product {
   images: string[];
   thumbnail: string;
 }
+
+export interface CartItemData {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+}
+
+export interface CartItem {
+  product: CartItemData;
+  quantity: number;
+}
+
+export interface Cart {
+  items: CartItem[];
+  totalPrice: number;
+}
+
+export interface StoreCart {
+  id: number;
+  quantity: number;
+}
+
+export interface CategoryList {
+  data: string[];
+}
+
+export interface PaginatedProductData {
+  limit: number;
+  products: Product[];
+  skip: number;
+  total: number;
+}
+
+export interface ApiResponse<T> {
+  state: string;
+  data?: T;
+  error?: any;
+}
+
+export interface ShippingForm {
+  deliveryMethod: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  city: string;
+  termsAccepted: boolean;
+}
+export interface ConfirmationDialogData {
+  title: string;
+  desc: string;
+}

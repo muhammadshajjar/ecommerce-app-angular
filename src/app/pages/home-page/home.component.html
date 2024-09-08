@@ -1,54 +1,43 @@
 <section class="actions container">
-  <app-search (searchQuery)="onSearchQuery($event)" />
+  <app-search
+    (searchQuery)="onSearchQuery($event)"
+    [searchedQuery]="searchQuery"
+  />
   <app-category
     (selectCategory)="onCategoryChange($event)"
     [selectedCategory]="selectedCategory"
   />
 </section>
 
-<section class="results container">
-  @if (searchQuery || selectedCategory) {
-    <div class="results-info">
-      <span>Results for:</span>
-      @if (searchQuery) {
-        <p>
-          {{ searchQuery }}
-        </p>
-      } @else {
-        <p>
-          {{ selectedCategory }}
-        </p>
-      }
-    </div>
-    <button mat-flat-button (click)="clearAll()">Clear All</button>
-  }
+<section class="container add-product">
+  <button mat-flat-button routerLink="/add">Add Product</button>
 </section>
 
 <section class="container">
   @if (products$ | async; as data) {
-    <div class="products">
-      @switch (data.state) {
-        @case ("loading") {
-          <div class="feedback-container">
-            <mat-spinner />
-          </div>
-        }
-        @case ("error") {
-          <div class="feedback-container">
-            <p>Error: {{ data.error }}</p>
-          </div>
-        }
-        @case ("loaded") {
-          @for (product of data.data.products; track product.id) {
+    @switch (data.state) {
+      @case ("loading") {
+        <div class="feedback-container">
+          <mat-spinner />
+        </div>
+      }
+      @case ("error") {
+        <div class="feedback-container">
+          <p>Error: {{ data.error }}</p>
+        </div>
+      }
+      @case ("loaded") {
+        <div class="products">
+          @for (product of data.data?.products; track product.id) {
             <app-product-item [product]="product" />
           } @empty {
             <div class="feedback-container">
               <p>No products Found!</p>
             </div>
           }
-        }
+        </div>
       }
-    </div>
+    }
     <app-paginator
       (pagination)="onPaginationChange($event)"
       [totalProducts]="data?.data?.total"

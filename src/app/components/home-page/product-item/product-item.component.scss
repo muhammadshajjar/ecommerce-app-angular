@@ -6,6 +6,7 @@
 .card__banner {
   height: 280px;
   border-radius: 50px;
+  position: relative;
 
   & img {
     border-radius: 8px;
@@ -14,6 +15,19 @@
   }
   &:hover {
     cursor: pointer;
+  }
+}
+
+.card__actions {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1;
+
+  & a {
+    background-color: transparent;
+    color: #00a599;
+    padding: 0;
   }
 }
 

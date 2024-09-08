@@ -1,0 +1,30 @@
+<div class="container edit-product">
+  <div>
+    <h1>Edit Product</h1>
+    <button mat-flat-button class="delete-btn" (click)="onDeleteProduct()">
+      @if (productDeleteResult$ | async; as response) {
+        @switch (response.state) {
+          @case ("loading") {
+            Deleting....
+          }
+        }
+      } @else {
+        Delete Product
+      }
+    </button>
+  </div>
+
+  @if (productData$ | async; as response) {
+    @switch (response.state) {
+      @case ("loading") {
+        <mat-spinner />
+      }
+      @case ("error") {
+        <p>Error: {{ response.error }}</p>
+      }
+      @case ("loaded") {
+        <app-product-form [productData]="productData" />
+      }
+    }
+  }
+</div>

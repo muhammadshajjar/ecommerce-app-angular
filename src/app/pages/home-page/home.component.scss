@@ -1,16 +1,13 @@
 .actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  width: 80%;
+  margin: 50px auto;
 }
 
 .products {
   min-height: 80vh;
   overflow: scroll;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   justify-content: space-between;
   align-items: center;
   gap: 50px;
@@ -42,8 +39,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  // height: 40vh;
   & p {
     color: red;
     font-size: 14px;
   }
+}
+
+.add-product {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
 }

@@ -1,0 +1,19 @@
+<div class="checkout-content">
+  @if (orderPlaced && shippingFormData) {
+    <div class="order-confirmed">
+      <h3>Thank You , {{ shippingFormData.fullName }}</h3>
+      <p>Your Order is Placed Successfully!</p>
+      <a routerLink="../" mat-flat-button>Continue Shopping</a>
+    </div>
+  } @else {
+    <app-shipping-info
+      class="shipping-info"
+      (shippingFormData)="onGetShippingFormData($event)"
+    />
+    <app-order-summary
+      class="order-summary"
+      [shippingFormData]="shippingFormData"
+      (placeOrder)="onOrderPlaced()"
+    />
+  }
+</div>

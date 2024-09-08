@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Observable } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
+import { ApiResponse, PaginatedProductData } from '../../models/interfaces';
+import { UIControlService } from '../../services/uicontrol.service';
 
 @Component({
   selector: 'app-home',
@@ -12,12 +14,16 @@ export class HomeComponent {
   searchQuery: string = '';
   selectedCategory: string = '';
 
-  products$: Observable<any> | null = null;
+  products$: Observable<ApiResponse<PaginatedProductData>> | null = null;
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private uiControlService: UIControlService,
+  ) {}
 
   ngOnInit(): void {
     this.products$ = this.productService.getAllProducts();
+    this.uiControlService.setCartVisibility(true);
   }
 
   onPaginationChange(pageEvent: PageEvent): void {
@@ -29,24 +35,29 @@ export class HomeComponent {
 
   onSearchQuery(query: string): void {
     this.selectedCategory = '';
-    this.searchQuery = query;
+    this.searchQuery = query?.trim();
 
-    this.products$ = this.productService.getSearchedProduct(this.searchQuery);
+    if (this.searchQuery) {
+      this.products$ = this.productService.getSearchedProduct(this.searchQuery);
+    } else {
+      this.products$ = this.productService.getAllProducts();
+    }
   }
 
   onCategoryChange(category: string): void {
-    this.searchQuery = '';
-    this.selectedCategory = category;
+    if (category) {
+      this.searchQuery = '';
+      this.selectedCategory = category;
 
-    this.products$ = this.productService.getSelectedCategoryProducts(
-      this.selectedCategory,
-    );
+      this.products$ = this.productService.getSelectedCategoryProducts(
+        this.selectedCategory,
+      );
+    } else {
+      this.products$ = this.productService.getAllProducts();
+    }
   }
 
-  clearAll(): void {
-    this.searchQuery = '';
-    this.selectedCategory = '';
-
-    this.products$ = this.productService.getAllProducts();
+  ngOnDestroy() {
+    this.uiControlService.setCartVisibility(false);
   }
 }

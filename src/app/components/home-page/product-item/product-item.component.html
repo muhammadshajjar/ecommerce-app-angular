@@ -1,24 +1,30 @@
-<mat-card>
-  <div (click)="onPreviewDetail()" class="card__banner">
-    <img
-      mat-card-image
-      [src]="product?.thumbnail"
-      alt="product thumbnail image"
-    />
-  </div>
-
-  <mat-card-content class="card__content">
-    <div class="card__desc">
-      <h2>{{ product?.title }}</h2>
-      <p>
-        {{ product?.price | currency }}
-        <sup>{{ calculateDiscountedPrice() | currency }}</sup>
-      </p>
+@if (product) {
+  <mat-card>
+    <div class="card__banner" (click)="onPreviewDetail()">
+      <img
+        mat-card-image
+        [src]="product.thumbnail"
+        alt="product thumbnail image"
+      />
     </div>
-    <div class="card__cart">
-      <button mat-fab>
-        <mat-icon class="icon">add_shopping_cart</mat-icon>
-      </button>
+    <div class="card__actions">
+      <a [routerLink]="['/edit', product.id]" mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </a>
     </div>
-  </mat-card-content>
-</mat-card>
+    <mat-card-content class="card__content">
+      <div class="card__desc">
+        <h2>{{ product.title }}</h2>
+        <p>
+          {{ calculateDiscountedPrice() | currency }}
+          <sup>{{ product.price | currency }}</sup>
+        </p>
+      </div>
+      <div class="card__cart">
+        <button mat-fab (click)="onAddToCart()">
+          <mat-icon class="icon">add_shopping_cart</mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+}

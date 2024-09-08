@@ -57,3 +57,16 @@ body {
 .mat-typography h2 {
   margin: 0;
 }
+li {
+  list-style-type: none;
+}
+ul {
+  padding: 0;
+}
+
+.mdc-label {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 5px;
+}

@@ -8,6 +8,25 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/home-page/home.module').then((m) => m.HomeModule),
   },
+  {
+    path: 'edit',
+    loadChildren: () =>
+      import('./pages/edit-page/edit-page.module').then(
+        (m) => m.EditPageModule,
+      ),
+  },
+  {
+    path: 'add',
+    loadChildren: () =>
+      import('./pages/add-page/add-page.module').then((m) => m.AddPageModule),
+  },
+  {
+    path: 'checkout',
+    loadChildren: () =>
+      import('./pages/checkout-page/checkout-page.module').then(
+        (m) => m.CheckoutPageModule,
+      ),
+  },
 ];
 
 @NgModule({

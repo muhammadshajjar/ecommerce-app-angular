@@ -1,0 +1,14 @@
+.shipping-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
+
+.radio-icon {
+  color: rgb(53, 53, 53);
+}

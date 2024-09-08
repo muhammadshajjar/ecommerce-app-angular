@@ -1,0 +1,18 @@
+.edit-product {
+  margin: 14px auto;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      font-size: 30px;
+      font-weight: 500;
+    }
+  }
+}
+
+.delete-btn {
+  background-color: red;
+}

@@ -1,6 +1,6 @@
 .product-image {
   height: 300px;
-  width: 100%;
+  width: 500px;
 }
 .product-heading {
   display: flex;
@@ -18,4 +18,39 @@
 }
 .icon {
   color: gold;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.quantity-field {
+  width: 100px;
+  margin-right: 16px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.action-buttons button {
+  min-width: 100px;
+}
+
+.close-dialog {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  &:hover {
+    cursor: pointer;
+  }
+  &:focus {
+    border: none;
+  }
 }

@@ -1,0 +1,143 @@
+<form
+  class="product-form"
+  [formGroup]="productForm"
+  (ngSubmit)="onFormSubmit()"
+>
+  <div>
+    <mat-form-field class="product-form-field">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+
+      @if (productForm.get("title")?.hasError("required")) {
+        <mat-error>Title is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="product-form-field">
+      <mat-label>Price</mat-label>
+      <input matInput formControlName="price" type="number" />
+
+      @if (productForm.get("price")?.hasError("required")) {
+        <mat-error>Price is required</mat-error>
+      }
+
+      @if (productForm.get("price")?.hasError("min")) {
+        <mat-error>Price must be positive</mat-error>
+      }
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field class="product-form-field">
+      <mat-label>SKU</mat-label>
+      <input matInput formControlName="sku" type="text" />
+
+      @if (productForm.get("sku")?.hasError("required")) {
+        <mat-error>SKU is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field class="product-form-field">
+      <mat-label>Stock</mat-label>
+      <input matInput formControlName="stock" type="number" />
+
+      @if (productForm.get("stock")?.hasError("required")) {
+        <mat-error>Stock is required</mat-error>
+      }
+
+      @if (productForm.get("stock")?.hasError("min")) {
+        <mat-error>Stock must be positive</mat-error>
+      }
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="product-form-field">
+      <mat-label>Shipping Information</mat-label>
+      <input matInput formControlName="shippingInformation" type="text" />
+
+      @if (productForm.get("shippingInformation")?.hasError("required")) {
+        <mat-error>Shipping Information is required</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="product-form-field">
+      <mat-label>Warranty Information</mat-label>
+      <input matInput formControlName="warrantyInformation" />
+
+      @if (productForm.get("warrantyInformation")?.hasError("required")) {
+        <mat-error>Warranty Information is required</mat-error>
+      }
+    </mat-form-field>
+  </div>
+  <mat-form-field class="product-form-field">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+
+    @if (productForm.get("description")?.hasError("required")) {
+      <mat-error>Description is required</mat-error>
+    }
+  </mat-form-field>
+
+  <div>
+    <mat-form-field class="product-form-field">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="category">
+        @if (categories$ | async; as categories) {
+          @if (categories.state === "loaded") {
+            @for (category of categories.data; track category) {
+              <mat-option [value]="category">
+                {{ category }}
+              </mat-option>
+            }
+          }
+        }
+      </mat-select>
+      @if (productForm.get("category")?.hasError("required")) {
+        <mat-error>Category is required</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="product-form-field">
+      <mat-label>Discount Percentage </mat-label>
+      <input matInput formControlName="discountPercentage" type="number" />
+
+      @if (productForm.get("discountPercentage")?.hasError("required")) {
+        <mat-error>Discount Percentage is required</mat-error>
+      }
+
+      @if (productForm.get("discountPercentage")?.hasError("max")) {
+        <mat-error> Discount percentage cannot exceed 100%</mat-error>
+      }
+    </mat-form-field>
+  </div>
+  <div class="file-upload">
+    <input
+      type="file"
+      (change)="onImageUpload($event)"
+      accept="image/*"
+      id="fileInput"
+    />
+    @if (uploadedImage) {
+      <img [src]="uploadedImage" alt="Image Preview" />
+    }
+  </div>
+
+  <div>
+    <a mat-stroked-button routerLink="/home">Go back</a>
+    <button mat-flat-button type="submit" color="primary">
+      @if (productUpdateResult$ | async; as response) {
+        @switch (response.state) {
+          @case ("loading") {
+            {{ isEditMode ? "Editing..." : "Adding..." }}
+          }
+          @case ("error") {
+            <p>Error: {{ response.error }}</p>
+          }
+          @case ("loaded") {
+            {{ isEditMode ? "Edit" : "Add" }}
+          }
+        }
+      } @else {
+        {{ isEditMode ? "Edit" : "Add" }}
+      }
+    </button>
+  </div>
+</form>

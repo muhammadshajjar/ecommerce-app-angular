@@ -1,27 +1,35 @@
 <mat-dialog-content>
-  <img class="product-image" [src]="data.images[0]" [alt]="data.title" />
+  <img class="product-image" [src]="data.thumbnail" [alt]="data.title" />
   <div>
     <h2>{{ data.title }}</h2>
     <div class="product-heading">
       <h3>{{ data.price | currency }}</h3>
       <div class="rating">
         <mat-icon class="star-icon" class="icon">star</mat-icon>
-        <span>({{ data.rating }})</span>
+        <span>({{ data.rating || 0 }})</span>
       </div>
     </div>
   </div>
   <p>{{ data.description }}</p>
   <ul>
-    <li>Availability: {{ data.availabilityStatus }}</li>
+    <li>Availability: {{ data.stock > 0 ? "In Stock" : "Out of Stock" }}</li>
     <li>SKU: {{ data.sku }}</li>
     <li>Shipping: {{ data.shippingInformation }}</li>
     <li>Warranty: {{ data.warrantyInformation }}</li>
     <li>Return Policy: {{ data.returnPolicy }}</li>
   </ul>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-flat-button color="primary" (click)="onAddToCart()">
-    Add to Cart
-  </button>
+<button (click)="onCancel()" class="close-dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<mat-dialog-actions class="dialog-actions">
+  <mat-form-field class="quantity-field" appearance="outline">
+    <mat-label>Quantity</mat-label>
+    <input matInput type="number" [formControl]="quantityControl" min="1" />
+  </mat-form-field>
+  <div class="action-buttons">
+    <button mat-flat-button color="primary" (click)="onAddToCart()">
+      Add to Cart
+    </button>
+  </div>
 </mat-dialog-actions>

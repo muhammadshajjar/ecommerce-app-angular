@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PaginatorComponent } from './paginator.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('PaginatorComponent', () => {
   let component: PaginatorComponent;
@@ -8,9 +10,10 @@ describe('PaginatorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PaginatorComponent]
-    })
-    .compileComponents();
+      declarations: [PaginatorComponent],
+      imports: [MatPaginator, BrowserAnimationsModule],
+      providers: [],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PaginatorComponent);
     component = fixture.componentInstance;

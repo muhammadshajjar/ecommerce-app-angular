@@ -1,0 +1,42 @@
+.order-summary {
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
+
+.cart-items {
+  height: 370px;
+  overflow: scroll;
+}
+
+.pricing {
+  margin: 30px 0;
+  div {
+    display: flex;
+    justify-content: space-between;
+    margin: 3px 0;
+    p {
+      font-size: 15px;
+    }
+    span {
+      font-weight: bold;
+    }
+  }
+  .total {
+    font-size: 18px;
+    p {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+}
+
+.order-summary-actions {
+  display: flex;
+  flex-direction: column;
+
+  .shopping-btn {
+    margin-top: 5px;
+  }
+}
